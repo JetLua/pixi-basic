@@ -2,7 +2,7 @@
   export default Vue.extend({
     data() {
       return {
-        name: 'okfd'
+        name: 'done'
       }
     }
   })

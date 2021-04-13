@@ -15,6 +15,8 @@ module.exports = ({env, publicPath}) => {
       './src/style.less'
     ],
 
+    target: prod ? 'browserslist' : 'web',
+
     output: {
       path: path.resolve('dist'),
       publicPath: publicPath ?? '/',
@@ -53,6 +55,7 @@ module.exports = ({env, publicPath}) => {
           loader: 'vue-loader',
           options: {
             compilerOptions: {
+              hotReload: !prod,
               preserveWhitespace: false
             }
           }
