@@ -12,7 +12,7 @@
   ],
   "author": "JetLu",
   "license": "MIT",
-  "devDependencies": {
+  "dependencies": {
     "@babel/core": "latest",
     "@babel/plugin-proposal-class-properties": "latest",
     "@babel/plugin-transform-runtime": "latest",
@@ -42,9 +42,7 @@
     "vue-template-compiler": "latest",
     "webpack": "latest",
     "webpack-cli": "latest",
-    "webpack-dev-server": "latest"
-  },
-  "dependencies": {
+    "webpack-dev-server": "latest",
     "@babel/preset-typescript": "^7.13.0",
     "@typescript-eslint/eslint-plugin": "^4.22.0",
     "@typescript-eslint/parser": "^4.22.0",
