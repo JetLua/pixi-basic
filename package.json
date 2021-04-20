@@ -31,6 +31,9 @@
     "prismjs": "latest",
     "raw-loader": "latest",
     "style-loader": "latest",
+    "stylelint": "^13.12.0",
+    "stylelint-config-standard": "^21.0.0",
+    "stylelint-webpack-plugin": "^2.1.1",
     "url-loader": "latest",
     "vue": "latest",
     "vue-loader": "latest",
@@ -42,6 +45,15 @@
     "webpack-dev-server": "latest"
   },
   "dependencies": {
-    "@babel/preset-typescript": "^7.13.0"
+    "@babel/preset-typescript": "^7.13.0",
+    "@typescript-eslint/eslint-plugin": "^4.22.0",
+    "@typescript-eslint/parser": "^4.22.0",
+    "css-minimizer-webpack-plugin": "^2.0.0",
+    "eslint": "^7.24.0",
+    "eslint-plugin-vue": "^7.9.0",
+    "eslint-webpack-plugin": "^2.5.4",
+    "progress-bar-webpack-plugin": "^2.1.0",
+    "terser-webpack-plugin": "^5.1.1",
+    "vue-eslint-parser": "^7.6.0"
   }
 }

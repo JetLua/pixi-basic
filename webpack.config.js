@@ -2,9 +2,11 @@ const os = require('os')
 const path = require('path')
 const webpack = require('webpack')
 const {VueLoaderPlugin} = require('vue-loader')
+const TerserPlugin = require('terser-webpack-plugin')
+const ESLintPlugin = require('eslint-webpack-plugin')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
-
+const CssMinimizerWebpackPlugin = require('css-minimizer-webpack-plugin')
 
 module.exports = ({env, publicPath}) => {
   const prod = env === 'prod'
@@ -94,19 +96,67 @@ module.exports = ({env, publicPath}) => {
       })
     ],
 
+    optimization: {
+      runtimeChunk: true,
+      splitChunks: {
+        chunks: 'all',
+        cacheGroups: {
+          vendor: {
+            test: /node_modules/,
+            name: 'vendor',
+            chunks: 'all',
+            reuseExistingChunk: true
+          },
+          common: {
+            name: 'common',
+            priority: -1,
+            chunks: 'all',
+            reuseExistingChunk: true
+          }
+        }
+      }
+    },
+
     mode: prod ? 'production' : 'development'
   }
 
   if (prod) {
-    conf.plugins.push(new MiniCssExtractPlugin({
-      filename: 'style.[contenthash].css'
-    }))
+    Object.assign(config.optimization, {
+      minimize: true,
+      minimizer: [
+        new CssMinimizerWebpackPlugin(),
+        new TerserPlugin({
+          parallel: 8,
+          extractComments: false,
+          terserOptions: {
+            output: {
+              comments: false
+            }
+          },
+        })
+      ]
+    })
 
-    conf.optimization = {
-      splitChunks: {
-        chunks: 'all'
-      }
-    }
+    conf.plugins.push(
+      new MiniCssExtractPlugin({
+        filename: 'style.[contenthash:8].css'
+      }),
+    )
+  } else {
+    const StylelintPlugin = require('stylelint-webpack-plugin')
+    const ProgressBarPlugin = require('progress-bar-webpack-plugin')
+
+    conf.plugins.push(
+      new ESLintPlugin({
+        extensions: ['.js', '.ts', '.vue'],
+        outputReport: true
+      }),
+      new StylelintPlugin({
+        files: ['**/*.less']
+      }),
+      new webpack.HotModuleReplacementPlugin(),
+      new ProgressBarPlugin(),
+    )
   }
 
   return conf

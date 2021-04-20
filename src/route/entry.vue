@@ -20,3 +20,9 @@
     <button class="btn" @click="click">ok</button>
   </section>
 </template>
+
+<style lang="less" scoped>
+  section {
+    color: #37ac68;
+  }
+</style>
