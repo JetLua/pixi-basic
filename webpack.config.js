@@ -9,11 +9,7 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 module.exports = ({env, publicPath}) => {
   const prod = env === 'prod'
   const conf = {
-    entry: [
-      'bootstrap/dist/css/bootstrap.min.css',
-      './src/app.js',
-      './src/style.less'
-    ],
+    entry: ['./src/app.ts'],
 
     target: prod ? 'browserslist' : 'web',
 
@@ -26,7 +22,8 @@ module.exports = ({env, publicPath}) => {
 
     resolve: {
       alias: {
-        '@': path.resolve('.')
+        '@': path.resolve('.'),
+        '~': path.resolve('src'),
       }
     },
 
@@ -83,8 +80,6 @@ module.exports = ({env, publicPath}) => {
       new VueLoaderPlugin(),
 
       new webpack.ProvidePlugin({
-        PIXI: 'pixi.js',
-        Prism: 'prismjs',
         Router: ['vue-router', 'default'],
         Vue: ['vue/dist/vue.esm.js', 'default'],
       }),

@@ -2,7 +2,13 @@
   export default Vue.extend({
     data() {
       return {
-        name: 'done'
+        name: 'hi, guys.'
+      }
+    },
+
+    methods: {
+      click() {
+        alert('clicked!')
       }
     }
   })
@@ -11,6 +17,6 @@
 <template>
   <section>
     <p v-text="name"></p>
-    <button class="btn" @click="name = 123">ok</button>
+    <button class="btn" @click="click">ok</button>
   </section>
 </template>
